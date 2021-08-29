@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <div>
         <NevBar/>
-        <News/>
+        <News pageSize={9}/>
       </div>
     )
   }
