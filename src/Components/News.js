@@ -4,12 +4,27 @@
 // state : state is used when the value of variable is not fixed means the value of the variable is changed at run time.
 // Note: When you use map to iterate array the you have assign an unique key to every returned element.
 // componentDidMount: This method runs after the execution of rendor method.
+// defaultProps: The concept of the defaultProps is similer to the default value.
+// propTypes: propTypes is used define the type of props.
 
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner';
+import PropTypes from 'prop-types'  //Shortcut : impt
 
 export class News extends Component {
+
+    static defaultProps = {
+        country: 'in',
+        pageSize: 6,
+        category: 'general'
+    }
+
+    static propTypes = {
+        name: PropTypes.string,     //Shortcut : pts
+        pageSize: PropTypes.number, //Shortcut : ptn
+        category: PropTypes.string
+    }
 
     constructor() {
         super();
@@ -18,11 +33,11 @@ export class News extends Component {
             page: 1,            
             loading: false
         }
-        console.log("constructor");
+        console.log("In constructor()");
     }
 
     async componentDidMount(){
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=82dff8e01a954fc388f6a74ead7f25a5&page=1&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.setState({loading:true});
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -31,11 +46,11 @@ export class News extends Component {
             totalArticles: parsedData.totalResults,
             loading: false
         })
-        console.log("CDM");
+        console.log("In componentDidMount() method");
     }
 
     handlePreviousClick = async ()=>{
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=82dff8e01a954fc388f6a74ead7f25a5&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
         this.setState({loading:true});
         let data = await fetch(url);
         let parsedData = await data.json();        
@@ -47,7 +62,7 @@ export class News extends Component {
     }
 
     handleNextClick = async ()=>{
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=82dff8e01a954fc388f6a74ead7f25a5&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
         this.setState({loading:true});
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -61,8 +76,8 @@ export class News extends Component {
     render(){
         return (
             <div className="container my-3">
-                {console.log("Render")}
-                <h1 className="text-center">NewsQuicker - Top Headlines</h1>
+                {console.log("In render() method")}
+                <h1 className="text-center" style={{margin: '30px'}}>NewsQuicker - Top Headlines</h1>
                 {this.state.loading && <Spinner/>}
                 <div className="row">
                     {!this.state.loading && this.state.articles.map((element)=>{

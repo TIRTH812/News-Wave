@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <div>
         <NevBar/>
-        <News pageSize={9}/>
+        <News pageSize={6} apiKey="82dff8e01a954fc388f6a74ead7f25a5" country="in" category="sports"/>
       </div>
     )
   }
