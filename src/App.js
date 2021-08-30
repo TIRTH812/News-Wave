@@ -11,9 +11,9 @@ import {
 
 export default class App extends Component {
   render() {
-    let pageSize = 6;
-    let apiKey = "82dff8e01a954fc388f6a74ead7f25a5";
-    let country = "in";
+    const pageSize = 6;
+    const apiKey = "7c9f2f5fbd7448518153de0a31174cbc";
+    const country = "in";
     return (
       <div>
         <Router>
