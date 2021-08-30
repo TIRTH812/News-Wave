@@ -83,7 +83,7 @@ export class News extends Component {
                     {!this.state.loading && this.state.articles.map((element)=>{
                         return (
                             <div className="col-md-4" key={element.url}>
-                                <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage?element.urlToImage:"https://images.moneycontrol.com/static-mcnews/2021/08/Windows-11-770x433.jpg"} newsUrl={element.url}/>
+                                <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage?element.urlToImage:"https://images.moneycontrol.com/static-mcnews/2021/08/Windows-11-770x433.jpg"} newsUrl={element.url} author={element.author?element.author:"Unknown"} date={element.publishedAt?element.publishedAt:""} source={element.source.name}/>
                             </div>
                         )
                     })}
